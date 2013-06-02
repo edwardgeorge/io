@@ -1,0 +1,19 @@
+find_package(PkgConfig)
+pkg_check_modules(PC_ZEROMQ libzmq)
+set(ZEROMQ_DEFINITIONS ${PC_ZEROMQ_CFLAGS_OTHER})
+
+find_path(ZEROMQ_INCLUDE_DIR zmq.h
+    HINTS ${PC_ZEROMQ_INCLUDEDIR} ${PC_ZEROMQ_INCLUDE_DIRS})
+
+find_library(ZEROMQ_LIBRARY zmq
+    HINTS ${PC_ZEROMQ_LIBDIR} ${PC_ZEROMQ_LIBRARY_DIRS})
+
+set(ZEROMQ_LIBRARIES ${ZEROMQ_LIBRARY} )
+set(ZEROMQ_INCLUDE_DIRS ${ZEROMQ_INCLUDE_DIR} )
+
+include(FindPackageHandleStandardArgs)
+
+find_package_handle_standard_args(ZEROMQ DEFAULT_MSG
+    ZEROMQ_LIBRARY ZEROMQ_INCLUDE_DIR)
+
+mark_as_advanced(ZEROMQ_INCLUDE_DIR ZEROMQ_LIBRARY)

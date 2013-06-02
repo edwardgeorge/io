@@ -1,0 +1,3 @@
+ZMQSocket do (
+    newSlot("context")
+)
